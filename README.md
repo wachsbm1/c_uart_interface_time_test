@@ -13,6 +13,8 @@ Building
 $ cd c_uart_interface_example/
 $ make
 ```
+If the makefile does not work, try compiling with: 
+g++ -I mavlink/include/mavlink/v2.0 mavlink_control.cpp serial_port.cpp autopilot_interface.cpp -o mavlink_control -lpthread
 
 Hardware Setup
 =========
