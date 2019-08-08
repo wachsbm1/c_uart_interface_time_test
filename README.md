@@ -1,9 +1,9 @@
-C-UART Interface Example
+C-UART Interface Time Test Example (derived from the C-UART Interface Example)
 ========================
 
-This is a simple MAVLink to UART interface example for *nix systems that can allow communication between Pixhawk and an offboard computer.
+This is a simple MAVLink to UART interface example for *nix systems that can allow communication between Pixhawk and an offboard computer. 
 
-This example will receive one MAVLink message and send one MAVLink message.
+This example will receive one MAVLink message and send one MAVLink message. Furthermore, this example will also time how long it takes to send and receive the message. 
 
 
 Building
@@ -28,7 +28,6 @@ Execution
 
 You have to pick a port name, try searching for it with 
 ```
-
 $ ls /dev/ttyACM* 
 $ ls /dev/ttyUSB*
 ```
@@ -45,7 +44,7 @@ The Pixhawk USB port will show up on a `ttyACM*`, an FTDI cable will show up on 
 Run the example executable on the host shell:
 
 ```
-$ cd c_uart_interface_example/
+$ cd c_uart_interface_time_test_example/
 $ ./mavlink_control -d /dev/ttyACM0
 ```
 
@@ -55,50 +54,58 @@ Here's an example output:
 
 ```
 OPEN PORT
-Connected to /dev/ttyUSB0 with 57600 baud, 8 data bits, no parity, 1 stop bit (8N1)
+Connected to /dev/ttyACM0 with 57600 baud, 8 data bits, no parity, 1 stop bit (8N1)
 
 START READ THREAD 
 
-CHECK FOR HEARTBEAT
+CHECK FOR MESSAGES
 Found
 
 GOT VEHICLE SYSTEM ID: 1
-GOT AUTOPILOT COMPONENT ID: 50
+GOT AUTOPILOT COMPONENT ID: 1
 
-INITIAL POSITION XYZ = [ 8.2935 , -1.1447 , -0.7609 ] 
-INITIAL POSITION YAW = 2.1539 
+INITIAL POSITION XYZ = [ 0.0000 , 0.0000 , 0.0000 ] 
+INITIAL POSITION YAW = 0.0254 
 
 START WRITE THREAD 
 
 ENABLE OFFBOARD MODE
 
 SEND OFFBOARD COMMANDS
-POSITION SETPOINT XYZ = [ 3.2935 , -6.1447 , -0.7609 ] 
-POSITION SETPOINT YAW = 2.1539 
-0 CURRENT POSITION XYZ = [  8.2935 , -1.1447 , -0.7609 ] 
-1 CURRENT POSITION XYZ = [  8.2935 , -1.1447 , -0.7609 ] 
-2 CURRENT POSITION XYZ = [  8.2524 , -1.1444 , -0.7667 ] 
-3 CURRENT POSITION XYZ = [  8.2205 , -1.1431 , -0.7747 ] 
-4 CURRENT POSITION XYZ = [  8.1920 , -1.1421 , -0.7737 ] 
-5 CURRENT POSITION XYZ = [  8.1920 , -1.1421 , -0.7737 ] 
-6 CURRENT POSITION XYZ = [  8.1539 , -1.1414 , -0.7847 ] 
-7 CURRENT POSITION XYZ = [  8.1522 , -1.1417 , -0.7820 ] 
+Sent 13 bits
+1) Sending message took: 119.461 microseconds
+1) Sent message at: 8370.93 Hz
+
+POSITION SETPOINT XYZ = [ -5.0000 , -5.0000 , 0.0000 ] 
+POSITION SETPOINT YAW = 0.0254 
+0 CURRENT POSITION XYZ = [  0.0000 ,  0.0000 ,  0.0000 ] 
+1 CURRENT POSITION XYZ = [  0.0000 ,  0.0000 ,  0.0000 ] 
+2 CURRENT POSITION XYZ = [  0.0000 ,  0.0000 ,  0.0000 ] 
+3 CURRENT POSITION XYZ = [  0.0000 ,  0.0000 ,  0.0000 ] 
+4 CURRENT POSITION XYZ = [  0.0000 ,  0.0000 ,  0.0000 ] 
+5 CURRENT POSITION XYZ = [  0.0000 ,  0.0000 ,  0.0000 ] 
+6 CURRENT POSITION XYZ = [  0.0000 ,  0.0000 ,  0.0000 ] 
+7 CURRENT POSITION XYZ = [  0.0000 ,  0.0000 ,  0.0000 ] 
 
 DISABLE OFFBOARD MODE
 
 READ SOME MESSAGES 
+1) Receiving messages took: 6.26964e+06 microseconds
+1) Received messages at: 0.159499 Hz
+
 Got message LOCAL_POSITION_NED (spec: https://mavlink.io/en/messages/common.html#LOCAL_POSITION_NED)
-    pos  (NED):  8.152975 -1.141093 -0.784075 (m)
+    pos  (NED):  0.000000 0.000000 0.000000 (m)
 Got message HIGHRES_IMU (spec: https://mavlink.io/en/messages/common.html#HIGHRES_IMU)
-    ap time:     3611390110 
-    acc  (NED):   0.005503  0.044659 -9.740363 (m/s^2)
-    gyro (NED):  -0.003064  0.003857  0.000005 (rad/s)
-    mag  (NED):  -0.117767 -0.335362 -0.253204 (Ga)
-    baro:        1020.519958 (mBar) 
-    altitude:    -60.341393 (m) 
-    temperature: 46.779999 C 
+    ap time:     0 
+    acc  (NED):   0.000000  0.000000  0.000000 (m/s^2)
+    gyro (NED):   0.000000  0.000000  0.000000 (rad/s)
+    mag  (NED):   0.000000  0.000000  0.000000 (Ga)
+    baro:        0.000000 (mBar) 
+    altitude:    0.000000 (m) 
+    temperature: 0.000000 C 
 
 CLOSE THREADS
+time_to_exit and pthread have been reached
 
 CLOSE PORT
 ```
